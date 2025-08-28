@@ -8,22 +8,30 @@ body {
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
-    padding: 20px 50px;
+    padding: 20px 50px; /* This padding creates the side margins */
     background: linear-gradient(135deg, #ffffff, #e0eaff, #c2d9ff);
-    position: fixed; /* Makes the navbar stick to the top */
+    position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000; /* Ensures it stays on top of other content */
+    z-index: 1000;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    gap: 30px; /* Added for spacing */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* This is the new rule for our inner container */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Limits the width on large screens */
+    margin: 0 auto; /* Centers the content */
 }
 
 .logo {
     display: flex;
     align-items: center;
-    margin-right: auto; /* This is the key change */
+    /* The "margin-right: auto" is no longer needed */
 }
 
 .logo-img {
@@ -622,4 +630,3 @@ body {
     display: block;
   }
 }
-
