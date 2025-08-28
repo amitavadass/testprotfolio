@@ -1,63 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ===== HERO SLIDER =====
     const textElements = document.querySelectorAll('.slide-text');
     const imageElements = document.querySelectorAll('.hero-image');
     let currentIndex = 0;
 
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-    const navbar = document.querySelector('.navbar');
-
-    mobileMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        navbar.classList.toggle('nav-active');
-    });
-
     // Show the first text and image initially
-    textElements[0].classList.add('active-text');
-    imageElements[0].classList.add('active-image');
+    if (textElements.length > 0 && imageElements.length > 0) {
+        textElements[0].classList.add('active-text');
+        imageElements[0].classList.add('active-image');
+    }
 
     function swapContent() {
-        const currentText = textElements[currentIndex];
-        const currentImage = imageElements[currentIndex];
-
-        currentText.classList.remove('active-text');
-        currentImage.classList.remove('active-image');
+        textElements[currentIndex].classList.remove('active-text');
+        imageElements[currentIndex].classList.remove('active-image');
 
         currentIndex = (currentIndex + 1) % textElements.length;
 
-        const nextText = textElements[currentIndex];
-        const nextImage = imageElements[currentIndex];
-
-        nextText.classList.add('active-text');
-        nextImage.classList.add('active-image');
+        textElements[currentIndex].classList.add('active-text');
+        imageElements[currentIndex].classList.add('active-image');
     }
 
     setInterval(swapContent, 2000);
 
+    // ===== SERVICE CARDS =====
     const serviceWrappers = document.querySelectorAll('.service-wrapper');
     serviceWrappers.forEach(wrapper => {
         const whatsappBtn = wrapper.querySelector('.whatsapp-btn');
-        whatsappBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-        });
+        if (whatsappBtn) {
+            whatsappBtn.addEventListener('click', (event) => {
+                event.stopPropagation(); // prevent hover effect from interfering
+            });
+        }
     });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+    // ===== REVIEWS CAROUSEL =====
     const reviewsCarousel = document.querySelector('.reviews-carousel');
+    if (reviewsCarousel) {
+        reviewsCarousel.addEventListener('mouseenter', () => {
+            reviewsCarousel.style.animationPlayState = 'paused';
+        });
+        reviewsCarousel.addEventListener('mouseleave', () => {
+            reviewsCarousel.style.animationPlayState = 'running';
+        });
+    }
 
-    reviewsCarousel.addEventListener('mouseenter', () => {
-        reviewsCarousel.style.animationPlayState = 'paused';
-    });
+    // ===== MOBILE MENU =====
+    const hamburger = document.querySelector(".hamburger");
+    const mobileMenu = document.querySelector(".mobile-menu");
 
-    reviewsCarousel.addEventListener('mouseleave', () => {
-        reviewsCarousel.style.animationPlayState = 'running';
-    });
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("open"); 
+            // CSS handles the "display:flex / none"
+        });
+    }
 });
-  const hamburger = document.querySelector(".hamburger");
-  const mobileMenu = document.querySelector(".mobile-menu");
-
-  hamburger.addEventListener("click", () => {
-    mobileMenu.style.display =
-      mobileMenu.style.display === "flex" ? "none" : "flex";
-  });
